@@ -20,6 +20,12 @@ class Lignecommande
     #[ORM\Column(type: Types::DECIMAL, precision: 10, scale: 2, nullable: true)]
     private ?string $prixunitairecommande = null;
 
+    #[ORM\ManyToOne(inversedBy: 'ligneCommandes')]
+    private ?Commande $commande = null;
+
+    #[ORM\ManyToOne(inversedBy: 'ligneCommandes')]
+    private ?Produit $produit = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -45,6 +51,30 @@ class Lignecommande
     public function setPrixunitairecommande(?string $prixunitairecommande): static
     {
         $this->prixunitairecommande = $prixunitairecommande;
+
+        return $this;
+    }
+
+    public function getCommande(): ?Commande
+    {
+        return $this->commande;
+    }
+
+    public function setCommande(?Commande $commande): static
+    {
+        $this->commande = $commande;
+
+        return $this;
+    }
+
+    public function getProduit(): ?Produit
+    {
+        return $this->produit;
+    }
+
+    public function setProduit(?Produit $produit): static
+    {
+        $this->produit = $produit;
 
         return $this;
     }

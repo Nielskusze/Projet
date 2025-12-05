@@ -26,6 +26,9 @@ class Paiement
     #[ORM\Column(length: 50, nullable: true)]
     private ?string $statutpaiement = null;
 
+    #[ORM\OneToOne(inversedBy: 'paiement', cascade: ['persist', 'remove'])]
+    private ?Commande $commande = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -75,6 +78,18 @@ class Paiement
     public function setStatutpaiement(?string $statutpaiement): static
     {
         $this->statutpaiement = $statutpaiement;
+
+        return $this;
+    }
+
+    public function getCommande(): ?Commande
+    {
+        return $this->commande;
+    }
+
+    public function setCommande(?Commande $commande): static
+    {
+        $this->commande = $commande;
 
         return $this;
     }
